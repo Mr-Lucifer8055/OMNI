@@ -1,0 +1,201 @@
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+@font-face {
+    font-family: 'CustomFont';
+    src: url('images/Font.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background: url('https://picsum.photos/1920/1080') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+body.light-theme {
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --text-color: #333333;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.name {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding-bottom: 40px;
+    font-size: 30px;
+    font-weight: bold;
+    z-index: 100;
+}
+.name a {
+    color: #ff5100; /* Gold color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make it bold */
+  }
+  
+  .name a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 100;
+    font-size: 1.5rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px var(--shadow-color);
+    transition: all 0.3s ease;
+}
+
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px var(--shadow-color);
+    transition: all 0.3s ease;
+}
+
+.glass-effect:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px var(--shadow-color);
+}
+
+.main-title {
+    text-align: center;
+    font-size: 30px;
+    font-family: CustomFont, sans-serif;
+    margin-top: 50px;
+    padding: 30px;
+    margin-bottom: 3rem;
+}
+.image-container, .video-container {
+    display: flex; /* Enable flexbox layout */
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+    width: 70%;
+    margin: 0 auto 2rem; /* Center horizontally and add bottom margin */
+    overflow: hidden;
+}
+
+.section {
+    margin-bottom: 4rem;
+    align-items: center;
+}
+.section .info p {
+    font-size: 25px; /* Adjusts the text size */
+    line-height: 1.5; /* Improves readability */
+    padding: 0 20px; /* Equal horizontal gap on the sides */
+    letter-spacing: 0.5px; /* Adjust as needed */
+    line-height: 1.8; /* 1.8 times the font size */
+    margin: 0 auto; /* Centers the paragraph */
+    max-width: 800px; /* Sets a maximum width for better layout */
+    text-align: justify; /* Optional: Justifies the text */
+  }
+  
+.image-container, .video-container {
+    width: 60%;
+    margin-top: 50px;
+    margin-bottom: 2rem;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-container img, .video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.info {
+    margin-top: 0;
+    margin-left: 20px;
+    font-family: CustomFont, sans-serif;
+    color: var(--text-color);
+}
+
+
+.info h2 {
+    margin-top: 0;
+    font-size: 30px;
+    color: var(--text-color);
+}
+
+.scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--glass-bg);
+    padding: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+}
+
+.scroll-top.visible {
+    opacity: 1;
+}
+
+.footer-text {
+    margin-top: 0px;
+    padding: 23px 40px;
+
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensure no overflow */
+    text-align: center;
+    font-size: 27px;
+    font-family: 'CustomFont', sans-serif;
+  }
+  
+  .footer-text a {
+    color: #ff5100; /* Gold color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make it bold */
+  }
+  
+  .footer-text a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
+  .bow {
+    font-size: 40px; /* Adjust the size as needed */
+    font-weight: bold;
+    transition: transform 0.5s ease, color 0.5s ease, text-shadow 0.5s ease;
+    color: var(--primary-color);
+  }
+  
+  .bow:hover {
+    text-shadow: 0 0 10px var(--primary-color); /* Enhanced shadow on hover */
+    color: var(--secondary-color); /* Change color on hover */
+  }
+  

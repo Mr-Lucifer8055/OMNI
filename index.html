@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Showcase</title>
+    <link rel="icon" href="images/ping.png" type="image/icon type" />
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <canvas id="neural-network"></canvas>
+    <div class="container">
+      <div class="name">
+        <a href="https://bipinchowdary.github.io/" target="_blank"
+          >Bipin Chowdary</a
+        >
+      </div>
+
+      <div class="theme-toggle">
+        <i class="fas fa-sun"></i>
+      </div>
+
+      <h1 class="main-title glass-effect">
+        Navigation of 4-Omni Wheeled Robot using Gradient-based Algorithms and
+        Model Predictive Control
+      </h1>
+
+      <div class="section">
+        <div class="info">
+          <h2>Problem Statement</h2>
+          <p>
+            Consider a simple formulation of rocket landing where the rocket
+            state \(x(t)\) is represented by velocity of the robot
+            \(\dot{x}(t)\), \(\dot{y}(t)\), and angular velocity
+            \(\dot{\theta}(t)\) followed by robot's coordinates \(x(t)\) and
+            \(y(t)\), and orientation \(\theta(t)\), i.e., \[ x(t) =
+            [\dot{x}(t), \dot{y}(t), \dot{\theta}(t), x(t), y(t), \theta(t)]^T,
+            \] where \(t\) specifies time. The control input \(u(t)\) of the
+            robot includes angular velocity of each wheel of the robot
+            \(\omega_1(t)\), \(\omega_2(t)\), \(\omega_3(t)\), and
+            \(\omega_4(t)\).
+          </p>
+          <div class="image-container glass-effect">
+            <img src="images/omni1.png" alt="Omni Design" />
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="info">
+          <h2>Gradient Based Algorithm & Optimization</h2>
+          <p>The optimization problem is now formulated as:</p>
+          <a>
+            \[ \min_w ||x(T)||^2 \] \[ \dot{x}(t) = \frac{r_{wheel}}{2}
+            \Big(-\sin(\theta + \pi/4) \omega_1(t) - \sin(\theta + 3\pi/4)
+            \omega_2(t) - \sin(\theta + 5\pi/4) \omega_3(t) - \sin(\theta +
+            7\pi/4) \omega_4(t) \Big), \] \[ \dot{y}(t) = \frac{r_{wheel}}{2}
+            \Big(\cos(\theta + \pi/4) \omega_1(t) + \cos(\theta + 3\pi/4)
+            \omega_2(t) + \cos(\theta + 5\pi/4) \omega_3(t) + \cos(\theta +
+            7\pi/4) \omega_4(t) \Big), \] \[ \dot{\theta}(t) =
+            \frac{r_{wheel}}{2} \Big(\frac{1}{2r_{Robot}} \omega_1(t) +
+            \frac{1}{2r_{Robot}} \omega_2(t) + \frac{1}{2r_{Robot}} \omega_3(t)
+            + \frac{1}{2r_{Robot}} \omega_4(t) \Big), \] \[ x(t+1) = x(t) +
+            \dot{x}(t) \Delta t, \] \[ y(t+1) = y(t) + \dot{y}(t) \Delta t, \]
+            \[ \theta(t+1) = \theta(t) + \dot{\theta}(t) \Delta t, \] \[ u(t) =
+            \pi_w(x(t)), \forall t = 1, \dots, T-1. \]
+          </a>
+          <p>
+            While this problem is constrained, it is easy to see that the
+            objective function can be expressed as a function of \(x(T-1)\) and
+            \(u(T-1)\), where \(x(T-1)\) is a function of \(x(T-2)\) and
+            \(u(T-2)\), and so on. Thus it is essentially an unconstrained
+            problem with respect to \(w\).
+          </p>
+          <p>
+            This will be the navigation of the Omni Wheel Controller optimized
+            using Gradient Based Algorithm using Neural Network.
+          </p>
+          <div class="image-container glass-effect">
+            <img
+              src="images/omniw.gif"
+              alt="Gradient Based Algorithm Illustration"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="info">
+          <h2>MPC & Optimization</h2>
+          <p>
+            The Model Predictive Control (MPC) framework is utilized for
+            optimization by solving the following problem:
+          </p>
+          <p>
+            \[ \min_{u(1), \dots, u(T-1)} \sum_{t=1}^{T-1} ||x(t)||^2 +
+            ||u(t)||^2, \] subject to the same dynamics as described earlier.
+            The MPC controller predicts the future behavior of the robot and
+            computes the optimal control inputs \(u(t)\) for a finite horizon
+            \(T\).
+          </p>
+          <p>
+            The MPC optimization problem can be represented in matrix form as:
+          </p>
+          <p>
+            \[ \begin{aligned} &\min \quad J = \mathbf{x}^T \mathbf{Q}
+            \mathbf{x} + \mathbf{u}^T \mathbf{R} \mathbf{u}, \\ &\text{subject
+            to:} \\ &\mathbf{x}_{k+1} = \mathbf{A} \mathbf{x}_k + \mathbf{B}
+            \mathbf{u}_k, \\ &\mathbf{u}_{min} \leq \mathbf{u}_k \leq
+            \mathbf{u}_{max}, \\ &\mathbf{x}_{min} \leq \mathbf{x}_k \leq
+            \mathbf{x}_{max}, \end{aligned} \]
+          </p>
+          <p>
+            Here, \(\mathbf{A}\) and \(\mathbf{B}\) represent the system
+            dynamics matrices, \(\mathbf{Q}\) and \(\mathbf{R}\) are weighting
+            matrices for the state and control input, respectively, and
+            \(\mathbf{u}_{min}, \mathbf{u}_{max}, \mathbf{x}_{min},
+            \mathbf{x}_{max}\) denote the constraints on inputs and states.
+          </p>
+          <p>
+            This approach ensures stability and optimality for the robot's
+            navigation.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="info">
+          <h2>Results: MPC Optimization Algorithm</h2>
+          <div class="image-container glass-effect">
+            <img
+              src="images/omnim.gif"
+              alt="MPC Optimization Algorithm Result"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="footer-text">
+        Project By
+        <a
+          href="https://www.linkedin.com/in/bipin-chowdary8055/"
+          target="_blank"
+          >Bipin Chowdary</a
+        >
+        All rights reserved till <span class="bow" id="hidden-icon">⋈</span>
+      </div>
+      <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
